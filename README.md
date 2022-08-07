@@ -1,5 +1,6 @@
 # stochastic-yolov5
-##Install
+Install
+------- 
 Activate the conda environment.
 ```
 conda create -n env python=3.9
@@ -21,13 +22,14 @@ You will also require code for using LRP evaluation measures. To do this you nee
 
 After cocoevalLRP.py is located in your pycocotools folder, adjust the system path on line 10 of coco_LRP.py, line 11 of coco_mAP.py and line 16 of read_file.py to match your PythonAPI folder.
 
-##Usage 
+Usage
+------- 
 We are using the weight provided by YOLOv5:
 YOLOv5s https://github.com/ultralytics/yolov5/releases/download/v6.1/yolov5s.pt
 YOLOv5x https://github.com/ultralytics/yolov5/releases/download/v6.1/yolov5x.pt
 You need to rename the weight name to best.pt, if you want to use the YOLOv5x or other weights, you need to change the depth_multiple and width_multiple from yolov5s-dropblock.yaml, yolov5s-dropout.yaml and yolov5s-gdropout.yaml.
 
-###Run the model
+Run the model
 ```
 python val.py --cfg yolov5s-dropout.yaml --batch 4 --data coco.yaml --imgsz 640 --iou-thres 0.6 --num_samples 10 --conf-thres 0.5 --new_drop_rate 0.1 --corruption_num 7 --severity 2
 ```
@@ -41,7 +43,7 @@ Optional flags for model changes include ```--cfg```, ```num_samples```,```new_d
 
 The model will generate a json file in ```dets_converted_exp_0.5_0.6.json ```
 
-##Evaluate PDQ and mAP
+Evaluate PDQ and mAP
 ```
 python pdq_evaluation/evaluate.py --test_set coco --gt_loc ../datasets/coco/annotations/instances_val2017.json --det_loc dets_converted_exp_0.5_0.6.json --save_folder output --num_workers 16
 ```
